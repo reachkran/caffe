@@ -30,6 +30,11 @@ class Net {
 
   /// @brief Initialize a network with a NetParameter.
   void Init(const NetParameter& param);
+  //void moveToCPU();
+  void moveToCPU();
+  void moveToGPU();
+
+  inline size_t memory_used() const { return memory_used_; }
 
   /**
    * @brief Run Forward and return the result.
@@ -194,7 +199,9 @@ class Net {
   inline const vector<string>& param_display_names() const {
     return param_display_names_;
   }
-  /// @brief Input and output blob numbers
+ 
+ /// @brief Input and output blob numbers
+  
   inline int num_inputs() const { return net_input_blobs_.size(); }
   inline int num_outputs() const { return net_output_blobs_.size(); }
   inline const vector<Blob<Dtype>*>& input_blobs() const {

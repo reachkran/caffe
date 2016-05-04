@@ -103,7 +103,7 @@ const void* SyncedMemory::gpu_data() {
 
 void SyncedMemory::set_gpu_data(void* data) {
 #ifndef CPU_ONLY
-  CHECK(data);
+  //CHECK(data);
   if (own_gpu_data_) {
     int initial_device;
     cudaGetDevice(&initial_device);
@@ -114,7 +114,11 @@ void SyncedMemory::set_gpu_data(void* data) {
     cudaSetDevice(initial_device);
   }
   gpu_ptr_ = data;
-  head_ = HEAD_AT_GPU;
+  if (data) {
+    head_ = HEAD_AT_GPU;
+  } else {
+    head_ = HEAD_AT_CPU;
+  }
   own_gpu_data_ = false;
 #else
   NO_GPU;

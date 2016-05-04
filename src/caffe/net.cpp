@@ -703,6 +703,24 @@ void Net<Dtype>::ShareTrainedLayersWith(const Net* other) {
 }
 
 template <typename Dtype>
+void Net<Dtype>::moveToCPU() {
+  for (int i = 0; i < params_.size(); i++) {
+    cout << "freeing memory up: " << i << endl;
+    params_[i]->cpu_data(); 
+    params_[i]->set_gpu_data(NULL);  
+  }
+}
+
+template <typename Dtype>
+void Net<Dtype>::moveToGPU() {
+  for (int i = 0; i < params_.size(); i++) {
+    params_[i]->gpu_data(); 
+  }
+}
+
+
+
+template <typename Dtype>
 void Net<Dtype>::BackwardFrom(int start) {
   BackwardFromTo(start, 0);
 }
