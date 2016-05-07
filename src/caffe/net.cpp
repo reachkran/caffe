@@ -718,6 +718,12 @@ void Net<Dtype>::moveToGPU() {
   }
 }
 
+template <typename Dtype>
+void Net<Dtype>::moveToGPUAsync(const cudaStream_t& stream) {
+  for (int i = 0; i < params_.size(); i++) {
+    params_[i]->async_gpu_push(stream); 
+  }
+}
 
 
 template <typename Dtype>

@@ -33,7 +33,7 @@ class Net {
   //void moveToCPU();
   void moveToCPU();
   void moveToGPU();
-
+  void moveToGPUAsync(const cudaStream_t&);
   inline size_t memory_used() const { return memory_used_; }
 
   /**

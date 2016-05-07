@@ -216,6 +216,9 @@ class Blob {
     return diff_;
   }
 
+
+  void async_gpu_push(const cudaStream_t&) const;
+
   const Dtype* cpu_data() const;
   void set_cpu_data(Dtype* data);
   void set_gpu_data(Dtype* data);

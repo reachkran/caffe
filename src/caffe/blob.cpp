@@ -104,6 +104,12 @@ const Dtype* Blob<Dtype>::gpu_data() const {
 }
 
 template <typename Dtype>
+void Blob<Dtype>::async_gpu_push(const cudaStream_t& stream) const {
+  CHECK(data_);
+  data_->async_gpu_push(stream);
+}
+
+template <typename Dtype>
 const Dtype* Blob<Dtype>::cpu_diff() const {
   CHECK(diff_);
   return (const Dtype*)diff_->cpu_data();
